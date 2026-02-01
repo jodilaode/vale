@@ -25,10 +25,10 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            width: 350px;
-            padding: 40px 30px;
+            width: 320px;
+            padding: 40px 25px;
             border-radius: 30px;
             text-align: center;
             box-shadow: 0 20px 50px rgba(255, 64, 129, 0.2);
@@ -38,92 +38,90 @@
         }
 
         .profile {
-            width: 110px;
-            height: 110px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--primary-pink);
             margin-bottom: 20px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
 
         h2 {
             font-family: 'Quicksand', sans-serif;
             color: var(--dark-pink);
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
             margin: 10px 0;
             line-height: 1.3;
         }
 
         .buttons {
-            margin-top: 35px;
-            position: relative;
-            height: 50px;
+            margin-top: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
+            height: 50px;
         }
 
         button {
             border: none;
-            padding: 12px 28px;
-            font-size: 16px;
+            padding: 12px 25px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Quicksand', sans-serif;
+            transition: 0.3s;
         }
 
         .yes {
             background: var(--primary-pink);
             color: white;
-            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
-            z-index: 1;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
         }
 
         .no {
             background: #eee;
             color: #777;
             position: relative;
-            transition: transform 0.1s ease-out;
-            white-space: nowrap;
+            transition: 0.1s ease-out;
         }
 
         .result {
             display: none;
-            margin-top: 20px;
-            animation: fade 0.8s ease-out forwards;
+            animation: fade 0.8s ease-in;
         }
 
         .giphy {
             display: none;
-            margin: 20px auto 0;
-            width: 180px;
-            border-radius: 20px;
-            animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 15px auto 0;
+            width: 160px;
+            border-radius: 15px;
+            animation: pop 0.6s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+        }
+
+        /* Video YouTube Disembunyikan */
+        #youtube-player {
+            display: none;
         }
 
         .mute-btn {
-            margin-top: 25px;
             background: none;
-            font-size: 18px;
-            color: var(--primary-pink);
-            padding: 5px;
+            margin-top: 20px;
+            font-size: 20px;
             opacity: 0.5;
             cursor: pointer;
         }
 
         @keyframes fade {
-            from {opacity: 0; transform: translateY(20px);}
-            to {opacity: 1; transform: translateY(0);}
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes pop {
-            0% {transform: scale(0.5); opacity: 0;}
-            100% {transform: scale(1); opacity: 1;}
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
         }
 
         canvas {
@@ -134,10 +132,11 @@
         }
     </style>
 </head>
-
 <body>
 
 <canvas id="confetti"></canvas>
+
+<div id="youtube-player"></div>
 
 <div class="card">
     <img src="aku.jpg" class="profile" alt="Profile">
@@ -152,30 +151,46 @@
 
     <div class="result" id="result">
         <h2>YAY!!! 🎉💖</h2>
-        <p style="color: #666; font-size: 16px;">Kiwkiw kiwkiw cukurukuk 💕</p>
+        <p style="color: #666;">Kiwkiw kiwkiw cukurukuk 💕</p>
     </div>
 
     <img id="giphy" class="giphy" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif">
-
-    <audio id="music" loop>
-        <source src="https://music.youtube.com/watch?v=_JPebX6Av8M" type="audio/mpeg">
-        </audio>
 
     <button class="mute-btn" onclick="toggleMusic()" id="muteIcon">🔇</button>
 </div>
 
 <script>
+    // 1. Load YouTube IFrame Player API
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('youtube-player', {
+            height: '0',
+            width: '0',
+            videoId: 'm_qS_0JAn_o', // ID Video Yellow - Coldplay Piano
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'playlist': 'm_qS_0JAn_o'
+            }
+        });
+    }
+
     const noBtn = document.getElementById("noBtn");
-    const music = document.getElementById("music");
     const muteIcon = document.getElementById("muteIcon");
 
-    // Tombol NO Menghindar
-    noBtn.addEventListener("mouseover", () => {
-        const x = Math.floor(Math.random() * 250) - 125;
-        const y = Math.floor(Math.random() * 200) - 100;
+    // Efek Tombol NO menghindar
+    noBtn.addEventListener("mouseover", function() {
+        const x = Math.floor(Math.random() * 200) - 100;
+        const y = Math.floor(Math.random() * 160) - 80;
         
-        noBtn.style.position = "absolute";
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        this.style.position = "absolute"; 
+        this.style.transform = `translate(${x}px, ${y}px)`;
     });
 
     function yesClick() {
@@ -183,70 +198,59 @@
         document.getElementById("result").style.display = "block";
         document.getElementById("giphy").style.display = "block";
         startConfetti();
-        fadeInMusic();
-    }
-
-    function fadeInMusic() {
-        music.volume = 0;
-        music.play();
-        let v = 0;
-        const fade = setInterval(() => {
-            v += 0.05;
-            if (v >= 0.6) {
-                music.volume = 0.6;
-                clearInterval(fade);
-            } else {
-                music.volume = v;
-            }
-        }, 200);
-        muteIcon.innerText = "🔊";
-    }
-
-    function toggleMusic() {
-        if (music.paused) {
-            music.play();
+        
+        // Memutar musik dari YouTube Player
+        if (player && player.playVideo) {
+            player.playVideo();
+            player.setVolume(50);
             muteIcon.innerText = "🔊";
-        } else {
-            music.muted = !music.muted;
-            muteIcon.innerText = music.muted ? "🔇" : "🔊";
         }
     }
 
-    /* --- CONFETTI ANIMATION --- */
+    function toggleMusic() {
+        if (player) {
+            var state = player.getPlayerState();
+            if (state == 1) { // 1 = Playing
+                player.pauseVideo();
+                muteIcon.innerText = "🔇";
+            } else {
+                player.playVideo();
+                muteIcon.innerText = "🔊";
+            }
+        }
+    }
+
+    // --- Efek Confetti ---
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
-    let pieces = [];
-    let isConfettiActive = false;
+    let particles = [];
 
     function startConfetti() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         for (let i = 0; i < 100; i++) {
-            pieces.push({
+            particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                size: Math.random() * 8 + 4,
-                color: ["#ff4081", "#ff80ab", "#f48fb1", "#ff1744"][Math.floor(Math.random() * 4)],
-                speed: Math.random() * 3 + 2,
-                angle: Math.random() * 6.28
+                radius: Math.random() * 5 + 2,
+                color: ["#ff4081", "#ff80ab", "#f48fb1"][Math.floor(Math.random()*3)],
+                velocity: Math.random() * 3 + 2
             });
         }
-        if(!isConfettiActive) animateConfetti();
-        isConfettiActive = true;
+        animate();
     }
 
-    function animateConfetti() {
+    function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pieces.forEach(p => {
+        particles.forEach(p => {
             ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             ctx.fillStyle = p.color;
-            ctx.arc(p.x, p.y, p.size/2, 0, Math.PI * 2);
             ctx.fill();
-            p.y += p.speed;
-            p.x += Math.sin(p.angle) * 1;
+            p.y += p.velocity;
             if (p.y > canvas.height) p.y = -10;
         });
-        requestAnimationFrame(animateConfetti);
+        requestAnimationFrame(animate);
     }
 </script>
 
