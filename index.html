@@ -85,10 +85,6 @@
             border: 3px solid #ff4081;
         }
 
-        .hidden {
-            display: none;
-        }
-
         .mute-btn {
             margin-top: 10px;
             background: #f0f0f0;
@@ -103,8 +99,10 @@
 
 <div class="card">
     <!-- FOTO ATAS -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Eurasian_collared_dove.jpg"
-         class="profile" />
+    <img
+        src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Eurasian_collared_dove.jpg"
+        class="profile"
+    />
 
     <h2>Inaz, will you be my valentine? 💖</h2>
 
@@ -114,25 +112,24 @@
         <button class="no" onclick="alert('Coba dipikirin lagi 😆')">NO 🙈</button>
     </div>
 
-    <!-- HASIL -->
+    <!-- HASIL (MUNCUL SETELAH YES) -->
     <div class="result" id="result">
         <h2>YAY!!! 🎉💖</h2>
         <p>So... dinner this weekend? 💕</p>
 
         <!-- FOTO BESAR -->
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Eurasian_collared_dove.jpg"
-             class="big-photo" />
+        <img
+            src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Eurasian_collared_dove.jpg"
+            class="big-photo"
+        />
     </div>
-
-    <!-- FOTO BAWAH (AKAN DIHAPUS SETELAH YES) -->
-    <img id="bottomPhoto"
-         src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Eurasian_collared_dove.jpg"
-         class="big-photo"
-         style="margin-top:15px" />
 
     <!-- MUSIK -->
     <audio id="music" autoplay loop>
-        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7cbe3f7d62.mp3" type="audio/mpeg">
+        <source
+            src="https://cdn.pixabay.com/audio/2022/03/15/audio_7cbe3f7d62.mp3"
+            type="audio/mpeg"
+        >
     </audio>
 
     <!-- MUTE -->
@@ -143,19 +140,11 @@
     function yesClick() {
         document.getElementById("buttons").style.display = "none";
         document.getElementById("result").style.display = "block";
-
-        // 🔥 HAPUS FOTO BAWAH
-        const bottom = document.getElementById("bottomPhoto");
-        if (bottom) bottom.remove();
     }
 
     function toggleMusic() {
         const music = document.getElementById("music");
-        if (music.muted) {
-            music.muted = false;
-        } else {
-            music.muted = true;
-        }
+        music.muted = !music.muted;
     }
 </script>
 
