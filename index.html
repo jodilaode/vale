@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine 💖</title>
+    <title>Be My Valentine Inaz 💖</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -48,13 +48,13 @@
         }
 
         h2 {
-            font-family: 'Quicksand', sans-serif; /* Font baru yang lebih jelas */
+            font-family: 'Quicksand', sans-serif;
             color: var(--dark-pink);
             font-size: 26px;
-            font-weight: 700; /* Tebal supaya menonjol */
+            font-weight: 700;
             margin: 10px 0;
             line-height: 1.3;
-            letter-spacing: -0.5px; /* Biar lebih rapat dan modern */
+            letter-spacing: -0.5px;
         }
 
         .subtitle {
@@ -90,11 +90,6 @@
             box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
         }
 
-        .yes:hover {
-            transform: scale(1.1);
-            background: var(--dark-pink);
-        }
-
         .no {
             background: #f0f0f0;
             color: #888;
@@ -113,7 +108,6 @@
             margin: 20px auto 0;
             width: 200px;
             border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
@@ -124,10 +118,6 @@
             color: var(--primary-pink);
             padding: 5px;
             opacity: 0.6;
-        }
-
-        .mute-btn:hover {
-            opacity: 1;
         }
 
         @keyframes fade {
@@ -169,10 +159,10 @@
         <p class="subtitle">So... dinner this weekend? 💕</p>
     </div>
 
-    <img id="giphy" class="giphy" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif" alt="cute gif">
+    <img id="giphy" class="giphy" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif">
 
     <audio id="music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
     </audio>
 
     <button class="mute-btn" onclick="toggleMusic()" id="muteIcon">🔇</button>
@@ -183,7 +173,6 @@
     const music = document.getElementById("music");
     const muteIcon = document.getElementById("muteIcon");
 
-    /* YES CLICK */
     function yesClick() {
         document.getElementById("main-content").style.display = "none";
         document.getElementById("result").style.display = "block";
@@ -192,18 +181,17 @@
         fadeInMusic();
     }
 
-    /* NO BUTTON LOGIC */
     noBtn.addEventListener("mouseover", () => {
-        // Area lari tombol tetap di sekitar card agar tidak hilang ke luar layar
         const x = Math.random() * 200 - 100;
         const y = Math.random() * 150 - 75;
         noBtn.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    /* MUSIC LOGIC */
     function fadeInMusic() {
         music.volume = 0;
-        music.play();
+        music.play().catch(() => {
+            console.log("Klik layar dulu untuk memutar musik!");
+        });
         let v = 0;
         const fade = setInterval(() => {
             v += 0.05;
@@ -227,7 +215,6 @@
         }
     }
 
-    /* CONFETTI LOGIC */
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
     let pieces = [];
@@ -263,11 +250,6 @@
         });
         requestAnimationFrame(animateConfetti);
     }
-
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
 </script>
 
 </body>
