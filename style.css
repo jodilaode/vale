@@ -1,31 +1,44 @@
 body {
-    background: #fce4ec;
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0);
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
 .card {
     background: white;
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 25px;
     text-align: center;
-    width: 350px;
+    width: 360px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-.icon {
-    width: 80px;
+.profile {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #ff4081;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 22px;
     margin: 10px;
     font-size: 16px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 #yes {
@@ -33,6 +46,29 @@ button {
     color: white;
 }
 
+#yes:hover {
+    transform: scale(1.1);
+}
+
 #no {
-    background: #ccc;
+    background: #e0e0e0;
+}
+
+#result {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #ff4081;
+}
+
+#gif {
+    width: 200px;
+    margin-top: 10px;
+}
+
+.big-photo {
+    width: 200px;
+    margin-top: 15px;
+    border-radius: 20px;
+    border: 4px solid #ff4081;
 }
