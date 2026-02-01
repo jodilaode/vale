@@ -1,122 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffd1dc, #ffe4ec);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
+    <style>
+        :root {
+            --primary-pink: #ff4081;
+            --soft-pink: #ffd1dc;
+            --dark-pink: #c2185b;
+        }
 
-.card {
-    background: white;
-    width: 340px;
-    padding: 26px 22px 24px;
-    border-radius: 30px;
-    text-align: center;
-    box-shadow: 0 14px 34px rgba(0,0,0,0.18);
-    position: relative;
-    z-index: 2;
-}
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--soft-pink), #ffe4ec);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
 
-.profile {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #ff4081;
-    margin-bottom: 14px;
-}
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            width: 350px;
+            padding: 40px 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(255, 64, 129, 0.2);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
 
-h2 {
-    margin: 10px 0 6px;
-    line-height: 1.35;
-}
+        .profile {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-pink);
+            margin-bottom: 20px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
 
-.subtitle {
-    margin-top: 10px;
-    font-size: 16px;
-}
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--dark-pink);
+            font-size: 28px;
+            margin: 10px 0;
+            line-height: 1.2;
+        }
 
-.buttons {
-    margin-top: 18px;
-    position: relative;
-    height: 64px;
-}
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+            font-weight: 300;
+        }
 
-button {
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 22px;
-    cursor: pointer;
-}
+        .buttons {
+            margin-top: 30px;
+            position: relative;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
 
-.yes {
-    background: #ff4081;
-    color: white;
-}
+        button {
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
 
-.no {
-    background: #eee;
-    position: absolute;
-    transition: transform 0.04s linear; /* SUPER CEPET */
-}
+        .yes {
+            background: var(--primary-pink);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+        }
 
-.result {
-    display: none;
-    margin-top: 14px;
-    animation: fade 0.7s ease;
-}
+        .yes:hover {
+            transform: scale(1.1);
+            background: var(--dark-pink);
+        }
 
-/* GIPHY */
-.giphy {
-    display: none;
-    margin: 14px auto 0;
-    width: 180px;
-    border-radius: 16px;
-    animation: pop 0.6s ease;
-}
+        .no {
+            background: #f0f0f0;
+            color: #888;
+            position: absolute;
+            z-index: 10;
+        }
 
-.mute {
-    margin-top: 14px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #f2f2f2;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-}
+        .result {
+            display: none;
+            margin-top: 20px;
+            animation: fade 0.8s ease-out forwards;
+        }
 
-@keyframes fade {
-    from {opacity: 0; transform: translateY(10px);}
-    to {opacity: 1; transform: translateY(0);}
-}
+        .giphy {
+            display: none;
+            margin: 20px auto 0;
+            width: 200px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-@keyframes pop {
-    0% {transform: scale(0);}
-    70% {transform: scale(1.15);}
-    100% {transform: scale(1);}
-}
+        .mute-btn {
+            margin-top: 25px;
+            background: none;
+            font-size: 20px;
+            color: var(--primary-pink);
+            padding: 5px;
+            opacity: 0.6;
+        }
 
-/* Confetti */
-canvas {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-</style>
+        .mute-btn:hover {
+            opacity: 1;
+        }
+
+        @keyframes fade {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes pop {
+            0% {transform: scale(0.5); opacity: 0;}
+            100% {transform: scale(1); opacity: 1;}
+        }
+
+        canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -124,103 +152,120 @@ canvas {
 <canvas id="confetti"></canvas>
 
 <div class="card">
+    <img src="aku.jpg" class="profile" alt="Profile">
 
-    <!-- FOTO PROFIL -->
-    <img src="aku.jpg" class="profile">
-
-    <h2>Inaz, will you be my valentine? 💖</h2>
-
-    <div class="buttons" id="buttons">
-        <button class="yes" onclick="yesClick()">YES 💕</button>
-        <button class="no" id="noBtn">NO 🙈</button>
+    <div id="main-content">
+        <h2>Inaz, will you be my valentine? 💖</h2>
+        <div class="buttons" id="buttons">
+            <button class="yes" onclick="yesClick()">YES 💕</button>
+            <button class="no" id="noBtn">NO 🙈</button>
+        </div>
     </div>
 
     <div class="result" id="result">
         <h2>YAY!!! 🎉💖</h2>
-        <div class="subtitle">So... dinner this weekend? 💕</div>
+        <p class="subtitle">So... dinner this weekend? 💕</p>
     </div>
 
-    <!-- GIPHY GIF -->
-    <img
-        id="giphy"
-        class="giphy"
-        src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif"
-        alt="cute gif"
-    >
+    <img id="giphy" class="giphy" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif" alt="cute gif">
 
-    <!-- MUSIC -->
     <audio id="music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
 
-    <button class="mute" onclick="toggleMusic()">🔇</button>
+    <button class="mute-btn" onclick="toggleMusic()" id="muteIcon">🔇</button>
 </div>
 
 <script>
-/* YES CLICK */
-function yesClick() {
-    document.getElementById("buttons").style.display = "none";
-    document.getElementById("result").style.display = "block";
-    document.getElementById("giphy").style.display = "block";
-    startConfetti();
-    fadeInMusic();
-}
+    const noBtn = document.getElementById("noBtn");
+    const music = document.getElementById("music");
+    const muteIcon = document.getElementById("muteIcon");
 
-/* NO BUTTON KABUR SUPER LICIN */
-const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseenter", () => {
-    const x = Math.random() * 280 - 140;
-    const y = Math.random() * 140 - 70;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-});
-
-/* MUSIC */
-const music = document.getElementById("music");
-function fadeInMusic() {
-    music.volume = 0;
-    music.play();
-    let v = 0;
-    const fade = setInterval(() => {
-        v += 0.08;
-        music.volume = Math.min(v, 0.6);
-        if (v >= 0.6) clearInterval(fade);
-    }, 180);
-}
-function toggleMusic() {
-    music.muted = !music.muted;
-}
-
-/* CONFETTI */
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-
-let pieces = [];
-function startConfetti() {
-    for (let i = 0; i < 120; i++) {
-        pieces.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            r: Math.random() * 6 + 4,
-            d: Math.random() * 10 + 5
-        });
+    /* YES CLICK */
+    function yesClick() {
+        document.getElementById("main-content").style.display = "none";
+        document.getElementById("result").style.display = "block";
+        document.getElementById("giphy").style.display = "block";
+        startConfetti();
+        fadeInMusic();
     }
-    animateConfetti();
-}
 
-function animateConfetti() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    pieces.forEach(p => {
-        ctx.beginPath();
-        ctx.fillStyle = "#ff4081";
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-        p.y += p.d * 0.35;
-        if (p.y > canvas.height) p.y = 0;
+    /* NO BUTTON LOGIC */
+    noBtn.addEventListener("mouseover", () => {
+        // Area lari tombol tetap di sekitar card agar tidak hilang ke luar layar
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 150 - 75;
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
     });
-    requestAnimationFrame(animateConfetti);
-}
+
+    /* MUSIC LOGIC */
+    function fadeInMusic() {
+        music.volume = 0;
+        music.play();
+        let v = 0;
+        const fade = setInterval(() => {
+            v += 0.05;
+            if (v >= 0.5) {
+                music.volume = 0.5;
+                clearInterval(fade);
+            } else {
+                music.volume = v;
+            }
+        }, 200);
+        muteIcon.innerText = "🔊";
+    }
+
+    function toggleMusic() {
+        if (music.paused) {
+            music.play();
+            muteIcon.innerText = "🔊";
+        } else {
+            music.muted = !music.muted;
+            muteIcon.innerText = music.muted ? "🔇" : "🔊";
+        }
+    }
+
+    /* CONFETTI LOGIC */
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let pieces = [];
+    let isConfettiActive = false;
+
+    function startConfetti() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        for (let i = 0; i < 100; i++) {
+            pieces.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 8 + 4,
+                color: ["#ff4081", "#ff80ab", "#f48fb1", "#ff1744"][Math.floor(Math.random() * 4)],
+                speed: Math.random() * 3 + 2,
+                angle: Math.random() * 6.28
+            });
+        }
+        if(!isConfettiActive) animateConfetti();
+        isConfettiActive = true;
+    }
+
+    function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+            ctx.beginPath();
+            ctx.fillStyle = p.color;
+            ctx.arc(p.x, p.y, p.size/2, 0, Math.PI * 2);
+            ctx.fill();
+            p.y += p.speed;
+            p.x += Math.sin(p.angle) * 1;
+            if (p.y > canvas.height) p.y = -10;
+        });
+        requestAnimationFrame(animateConfetti);
+    }
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
 </script>
 
 </body>
