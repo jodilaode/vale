@@ -2,37 +2,162 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Valentine</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine 💖</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            width: 340px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            animation: pop 0.8s ease;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .profile {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #ff4081;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin: 10px 0;
+        }
+
+        .btn-group {
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .yes {
+            background: #ff4081;
+            color: white;
+        }
+
+        .no {
+            background: #eee;
+        }
+
+        .result {
+            display: none;
+            margin-top: 10px;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .big-photo {
+            width: 150px;
+            margin-top: 10px;
+            border-radius: 16px;
+            border: 3px solid #ff4081;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .mute-btn {
+            margin-top: 10px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="card">
-    <img src="aku.jpg" class="profile" />
+    <!-- FOTO ATAS -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Eurasian_collared_dove.jpg"
+         class="profile" />
 
-    <h1>Inaz, will you be my valentine? 💖</h1>
+    <h2>Inaz, will you be my valentine? 💖</h2>
 
-    <div id="buttons">
-        <button id="yes">YES 💕</button>
-        <button id="no">NO 😢</button>
+    <!-- BUTTON -->
+    <div class="btn-group" id="buttons">
+        <button class="yes" onclick="yesClick()">YES 💕</button>
+        <button class="no" onclick="alert('Coba dipikirin lagi 😆')">NO 🙈</button>
     </div>
 
-    <p id="result"></p>
-    <p id="ending">So… dinner this weekend? 💞</p>
+    <!-- HASIL -->
+    <div class="result" id="result">
+        <h2>YAY!!! 🎉💖</h2>
+        <p>So... dinner this weekend? 💕</p>
 
-    <img id="gif"
-         src="https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif"/>
+        <!-- FOTO BESAR -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Eurasian_collared_dove.jpg"
+             class="big-photo" />
+    </div>
 
-    <img id="photo" src="aku.jpg" class="big-photo"/>
+    <!-- FOTO BAWAH (AKAN DIHAPUS SETELAH YES) -->
+    <img id="bottomPhoto"
+         src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Eurasian_collared_dove.jpg"
+         class="big-photo"
+         style="margin-top:15px" />
 
-    <button id="mute">🔊</button>
+    <!-- MUSIK -->
+    <audio id="music" autoplay loop>
+        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7cbe3f7d62.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- MUTE -->
+    <button class="mute-btn" onclick="toggleMusic()">🔇</button>
 </div>
 
-<audio id="bg-music" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-</audio>
+<script>
+    function yesClick() {
+        document.getElementById("buttons").style.display = "none";
+        document.getElementById("result").style.display = "block";
 
-<script src="script.js"></script>
+        // 🔥 HAPUS FOTO BAWAH
+        const bottom = document.getElementById("bottomPhoto");
+        if (bottom) bottom.remove();
+    }
+
+    function toggleMusic() {
+        const music = document.getElementById("music");
+        if (music.muted) {
+            music.muted = false;
+        } else {
+            music.muted = true;
+        }
+    }
+</script>
+
 </body>
 </html>
