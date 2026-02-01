@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Will you be my Valentine?</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <div class="card">
-        <!-- Foto kamu -->
-        <img src="aku.jpg" class="profile">
+<div class="card">
+    <img src="aku.jpg" class="profile" />
 
-        <h1>nirali, will you be my valentine? 💖</h1>
+    <h1>Inaz, will you be my valentine? 💖</h1>
 
-        <div id="buttons">
-            <button id="yes">YES 💕</button>
-            <button id="no">NO 😢</button>
-        </div>
-
-        <p id="result"></p>
-
-        <!-- Muncul pas YES -->
-        <img id="gif" 
-             src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif" 
-             style="display:none;">
-
-        <img id="photo" src="aku.jpg" class="big-photo" style="display:none;">
+    <div id="buttons">
+        <button id="yes">YES 💕</button>
+        <button id="no">NO 😢</button>
     </div>
 
-    <script src="script.js"></script>
+    <p id="result"></p>
+    <p id="ending">So… dinner this weekend? 💕</p>
+
+    <img id="gif"
+         src="https://media.giphy.com/media/OkJat1YNdoD3W/giphy.gif" />
+
+    <img id="photo" src="aku.jpg" class="big-photo"/>
+
+    <button id="mute">🔊</button>
+</div>
+
+<!-- Piano instrumental (link, no download) -->
+<audio id="bg-music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js"></script>
 </body>
 </html>
