@@ -25,16 +25,16 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            width: 350px;
-            padding: 40px 30px;
-            border-radius: 30px;
+            width: 330px;
+            padding: 45px 25px;
+            border-radius: 35px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(255, 64, 129, 0.2);
+            box-shadow: 0 20px 60px rgba(255, 64, 129, 0.2);
             position: relative;
             z-index: 2;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .profile {
@@ -43,60 +43,60 @@
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--primary-pink);
-            margin-bottom: 20px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.15);
         }
 
         h2 {
             font-family: 'Quicksand', sans-serif;
             color: var(--dark-pink);
-            font-size: 26px;
+            font-size: 25px;
             font-weight: 700;
-            margin: 10px 0;
-            line-height: 1.3;
+            margin: 0;
+            line-height: 1.4;
         }
 
-        /* Container Tombol */
         .buttons {
-            margin-top: 35px;
-            position: relative;
-            height: 50px; /* Memberi ruang agar card tidak goyang saat tombol lari */
+            margin-top: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Jarak antara Yes dan No */
+            gap: 20px;
+            height: 50px;
+            position: relative;
         }
 
         button {
             border: none;
-            padding: 12px 28px;
+            padding: 14px 30px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Quicksand', sans-serif;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .yes {
             background: var(--primary-pink);
             color: white;
-            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
-            z-index: 1;
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.35);
+        }
+
+        .yes:hover {
+            transform: scale(1.1);
         }
 
         .no {
-            background: #eee;
-            color: #777;
-            position: relative; /* Default posisi normal */
-            transition: transform 0.1s ease-out; /* Kecepatan lari */
-            white-space: nowrap;
+            background: #f0f0f0;
+            color: #888;
+            position: relative;
+            z-index: 10;
         }
 
         .result {
             display: none;
-            margin-top: 20px;
-            animation: fade 0.8s ease-out forwards;
+            margin-top: 15px;
         }
 
         .giphy {
@@ -104,27 +104,24 @@
             margin: 20px auto 0;
             width: 180px;
             border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             animation: pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .mute-btn {
-            margin-top: 25px;
             background: none;
-            font-size: 18px;
-            color: var(--primary-pink);
+            margin-top: 25px;
+            font-size: 22px;
+            opacity: 0.4;
             padding: 5px;
-            opacity: 0.5;
-            cursor: pointer;
+            transition: 0.3s;
         }
 
-        @keyframes fade {
-            from {opacity: 0; transform: translateY(20px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
+        .mute-btn:hover { opacity: 1; }
 
         @keyframes pop {
-            0% {transform: scale(0.5); opacity: 0;}
-            100% {transform: scale(1); opacity: 1;}
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         canvas {
@@ -135,13 +132,12 @@
         }
     </style>
 </head>
-
 <body>
 
 <canvas id="confetti"></canvas>
 
 <div class="card">
-    <img src="aku.jpg" class="profile" alt="Profile">
+    <img src="aku.jpg" class="profile" alt="Valentine Image">
 
     <div id="main-content">
         <h2>Inaz, will you be my valentine? 💖</h2>
@@ -152,8 +148,8 @@
     </div>
 
     <div class="result" id="result">
-        <h2>YAY!!! 🎉💖</h2>
-        <p style="color: #666;">Kiwkiw kiwkiw cukurukuk 💕</p>
+        <h2 style="font-size: 28px;">YAY!!! 🎉💖</h2>
+        <p style="color: #666; font-family: 'Quicksand'; font-weight: 600;">Kiwkiw kiwkiw cukurukuk 💕</p>
     </div>
 
     <img id="giphy" class="giphy" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif">
@@ -171,37 +167,25 @@
     const muteIcon = document.getElementById("muteIcon");
 
     // Efek Tombol NO Menghindar
-    noBtn.addEventListener("mouseover", () => {
-        // Angka acak untuk perpindahan, dijaga agar tidak terlalu jauh dari layar
-        const x = Math.floor(Math.random() * 250) - 125;
+    noBtn.addEventListener("mouseover", function() {
+        const x = Math.floor(Math.random() * 260) - 130;
         const y = Math.floor(Math.random() * 200) - 100;
         
-        noBtn.style.position = "absolute"; // Berubah jadi absolute saat mulai lari
-        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+        this.style.position = "absolute"; 
+        this.style.transform = `translate(${x}px, ${y}px)`;
     });
 
     function yesClick() {
         document.getElementById("main-content").style.display = "none";
         document.getElementById("result").style.display = "block";
         document.getElementById("giphy").style.display = "block";
-        startConfetti();
-        fadeInMusic();
-    }
-
-    function fadeInMusic() {
-        music.volume = 0;
+        
+        // Memutar musik saat tombol Yes diklik
         music.play();
-        let v = 0;
-        const fade = setInterval(() => {
-            v += 0.05;
-            if (v >= 0.5) {
-                music.volume = 0.5;
-                clearInterval(fade);
-            } else {
-                music.volume = v;
-            }
-        }, 200);
         muteIcon.innerText = "🔊";
+        muteIcon.style.opacity = "1";
+        
+        startConfetti();
     }
 
     function toggleMusic() {
@@ -209,47 +193,49 @@
             music.play();
             muteIcon.innerText = "🔊";
         } else {
-            music.muted = !music.muted;
-            muteIcon.innerText = music.muted ? "🔇" : "🔊";
+            music.pause();
+            muteIcon.innerText = "🔇";
         }
     }
 
-    /* --- CONFETTI --- */
+    /* --- CONFETTI ANIMATION --- */
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
-    let pieces = [];
-    let isConfettiActive = false;
+    let particles = [];
 
     function startConfetti() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         for (let i = 0; i < 100; i++) {
-            pieces.push({
+            particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                size: Math.random() * 8 + 4,
-                color: ["#ff4081", "#ff80ab", "#f48fb1", "#ff1744"][Math.floor(Math.random() * 4)],
-                speed: Math.random() * 3 + 2,
-                angle: Math.random() * 6.28
+                radius: Math.random() * 5 + 2,
+                color: ["#ff4081", "#ff80ab", "#f48fb1", "#ffd1dc"][Math.floor(Math.random()*4)],
+                velocity: Math.random() * 3 + 2,
+                tilt: Math.random() * 10
             });
         }
-        if(!isConfettiActive) animateConfetti();
-        isConfettiActive = true;
+        animate();
     }
 
-    function animateConfetti() {
+    function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pieces.forEach(p => {
+        particles.forEach(p => {
             ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             ctx.fillStyle = p.color;
-            ctx.arc(p.x, p.y, p.size/2, 0, Math.PI * 2);
             ctx.fill();
-            p.y += p.speed;
-            p.x += Math.sin(p.angle) * 1;
+            p.y += p.velocity;
             if (p.y > canvas.height) p.y = -10;
         });
-        requestAnimationFrame(animateConfetti);
+        requestAnimationFrame(animate);
     }
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
 </script>
 
 </body>
