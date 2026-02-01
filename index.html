@@ -20,10 +20,10 @@ body {
 .card {
     background: white;
     width: 340px;
-    padding: 22px;
-    border-radius: 28px;
+    padding: 26px 22px 24px;
+    border-radius: 30px;
     text-align: center;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    box-shadow: 0 14px 34px rgba(0,0,0,0.18);
     position: relative;
     z-index: 2;
 }
@@ -34,22 +34,28 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #ff4081;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 h2 {
-    margin: 10px 0;
+    margin: 10px 0 6px;
+    line-height: 1.35;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 16px;
 }
 
 .buttons {
-    margin-top: 14px;
+    margin-top: 18px;
     position: relative;
-    height: 60px;
+    height: 64px;
 }
 
 button {
     border: none;
-    padding: 10px 18px;
+    padding: 10px 20px;
     font-size: 16px;
     border-radius: 22px;
     cursor: pointer;
@@ -63,16 +69,26 @@ button {
 .no {
     background: #eee;
     position: absolute;
+    transition: transform 0.04s linear; /* SUPER CEPET */
 }
 
 .result {
     display: none;
-    margin-top: 12px;
-    animation: fade 0.8s ease;
+    margin-top: 14px;
+    animation: fade 0.7s ease;
+}
+
+/* GIPHY */
+.giphy {
+    display: none;
+    margin: 14px auto 0;
+    width: 180px;
+    border-radius: 16px;
+    animation: pop 0.6s ease;
 }
 
 .mute {
-    margin-top: 12px;
+    margin-top: 14px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -83,15 +99,20 @@ button {
 }
 
 @keyframes fade {
-    from {opacity: 0; transform: translateY(8px);}
+    from {opacity: 0; transform: translateY(10px);}
     to {opacity: 1; transform: translateY(0);}
 }
 
-/* Confetti canvas */
+@keyframes pop {
+    0% {transform: scale(0);}
+    70% {transform: scale(1.15);}
+    100% {transform: scale(1);}
+}
+
+/* Confetti */
 canvas {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     pointer-events: none;
     z-index: 1;
 }
@@ -104,7 +125,7 @@ canvas {
 
 <div class="card">
 
-    <!-- FOTO PROFIL SAJA -->
+    <!-- FOTO PROFIL -->
     <img src="aku.jpg" class="profile">
 
     <h2>Inaz, will you be my valentine? 💖</h2>
@@ -116,10 +137,18 @@ canvas {
 
     <div class="result" id="result">
         <h2>YAY!!! 🎉💖</h2>
-        <p>So... dinner this weekend? 💕</p>
+        <div class="subtitle">So... dinner this weekend? 💕</div>
     </div>
 
-    <!-- MUSIK -->
+    <!-- GIPHY GIF -->
+    <img
+        id="giphy"
+        class="giphy"
+        src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif"
+        alt="cute gif"
+    >
+
+    <!-- MUSIC -->
     <audio id="music" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
@@ -132,15 +161,16 @@ canvas {
 function yesClick() {
     document.getElementById("buttons").style.display = "none";
     document.getElementById("result").style.display = "block";
+    document.getElementById("giphy").style.display = "block";
     startConfetti();
     fadeInMusic();
 }
 
-/* NO BUTTON KABUR */
+/* NO BUTTON KABUR SUPER LICIN */
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseenter", () => {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 40 - 20;
+    const x = Math.random() * 280 - 140;
+    const y = Math.random() * 140 - 70;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
 });
 
@@ -149,12 +179,12 @@ const music = document.getElementById("music");
 function fadeInMusic() {
     music.volume = 0;
     music.play();
-    let vol = 0;
+    let v = 0;
     const fade = setInterval(() => {
-        vol += 0.05;
-        music.volume = Math.min(vol, 0.6);
-        if (vol >= 0.6) clearInterval(fade);
-    }, 200);
+        v += 0.08;
+        music.volume = Math.min(v, 0.6);
+        if (v >= 0.6) clearInterval(fade);
+    }, 180);
 }
 function toggleMusic() {
     music.muted = !music.muted;
@@ -163,8 +193,8 @@ function toggleMusic() {
 /* CONFETTI */
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 let pieces = [];
 function startConfetti() {
@@ -184,9 +214,9 @@ function animateConfetti() {
     pieces.forEach(p => {
         ctx.beginPath();
         ctx.fillStyle = "#ff4081";
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
-        p.y += p.d * 0.3;
+        p.y += p.d * 0.35;
         if (p.y > canvas.height) p.y = 0;
     });
     requestAnimationFrame(animateConfetti);
