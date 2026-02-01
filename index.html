@@ -56,15 +56,14 @@
             line-height: 1.3;
         }
 
-        /* Container Tombol */
         .buttons {
             margin-top: 35px;
             position: relative;
-            height: 50px; /* Memberi ruang agar card tidak goyang saat tombol lari */
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Jarak antara Yes dan No */
+            gap: 20px;
         }
 
         button {
@@ -88,8 +87,8 @@
         .no {
             background: #eee;
             color: #777;
-            position: relative; /* Default posisi normal */
-            transition: transform 0.1s ease-out; /* Kecepatan lari */
+            position: relative;
+            transition: transform 0.1s ease-out;
             white-space: nowrap;
         }
 
@@ -153,14 +152,14 @@
 
     <div class="result" id="result">
         <h2>YAY!!! 🎉💖</h2>
-        <p style="color: #666;">Kiwkiw kiwkiw cukurukuk 💕</p>
+        <p style="color: #666; font-size: 16px;">Kiwkiw kiwkiw cukurukuk 💕</p>
     </div>
 
     <img id="giphy" class="giphy" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHB6bGRvNDA2YW8yNWRtcG1xeG0zeTQ1bHI1bmF4dXpxMnJpZjRrNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/R6gvnAxj2ISzJdbA63/giphy.gif">
 
     <audio id="music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
-    </audio>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        </audio>
 
     <button class="mute-btn" onclick="toggleMusic()" id="muteIcon">🔇</button>
 </div>
@@ -170,13 +169,12 @@
     const music = document.getElementById("music");
     const muteIcon = document.getElementById("muteIcon");
 
-    // Efek Tombol NO Menghindar
+    // Tombol NO Menghindar
     noBtn.addEventListener("mouseover", () => {
-        // Angka acak untuk perpindahan, dijaga agar tidak terlalu jauh dari layar
         const x = Math.floor(Math.random() * 250) - 125;
         const y = Math.floor(Math.random() * 200) - 100;
         
-        noBtn.style.position = "absolute"; // Berubah jadi absolute saat mulai lari
+        noBtn.style.position = "absolute";
         noBtn.style.transform = `translate(${x}px, ${y}px)`;
     });
 
@@ -194,8 +192,8 @@
         let v = 0;
         const fade = setInterval(() => {
             v += 0.05;
-            if (v >= 0.5) {
-                music.volume = 0.5;
+            if (v >= 0.6) {
+                music.volume = 0.6;
                 clearInterval(fade);
             } else {
                 music.volume = v;
@@ -214,7 +212,7 @@
         }
     }
 
-    /* --- CONFETTI --- */
+    /* --- CONFETTI ANIMATION --- */
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
     let pieces = [];
